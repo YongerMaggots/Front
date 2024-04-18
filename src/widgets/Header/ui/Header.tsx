@@ -1,7 +1,7 @@
 import Link from 'antd/es/typography/Link';
 import styles from './Header.module.scss';
-import LogoImage from '/public/logo.jpg';
-import {Avatar, Dropdown, MenuProps} from 'antd';
+import LogoImage from '/logo.jpg';
+import {Avatar, Dropdown, MenuProps, Typography} from 'antd';
 import {useProfileStore} from '@/entities/profile/model';
 
 export const Header = () => {
@@ -13,14 +13,18 @@ export const Header = () => {
     const items: MenuProps['items'] = [
         {
             key: '1',
-            label: <Link href='/profile'>Профиль</Link>,
+            label: <Typography.Link href='/profile/my'>Профиль</Typography.Link>,
         },
         {
             key: '2',
+            label: <Typography.Link href='/records'>Мои записи</Typography.Link>,
+        },
+        {
+            key: '3',
             label: (
-                <Link onClick={logout} className={styles.logout}>
+                <Typography.Text type='danger' onClick={logout} className={styles.logout}>
                     Выход
-                </Link>
+                </Typography.Text>
             ),
         },
     ];
@@ -28,18 +32,18 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <div className={styles.content}>
-                <Link href={'/'} className={styles.logoContainer}>
+                <Typography.Link href={'/'} className={styles.logoContainer}>
                     <img src={LogoImage} className={styles.logo} />
-                </Link>
+                </Typography.Link>
                 <nav className={styles.nav}>
-                    <Link href={'/'}>Записаться к врачу</Link>
+                    <Typography.Link href={'/'}>Записаться к врачу</Typography.Link>
                     <div className={styles.profile}>
-                        {profile ? (
+                        {!profile ? (
                             <Dropdown menu={{items}}>
                                 <Avatar shape='circle' />
                             </Dropdown>
                         ) : (
-                            <Link href='/login'>Вход/Регистрация</Link>
+                            <Typography.Link href='/login'>Вход/Регистрация</Typography.Link>
                         )}
                     </div>
                 </nav>

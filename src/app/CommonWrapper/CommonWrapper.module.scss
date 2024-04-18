@@ -5,4 +5,6 @@
 }
 .content {
     flex: 1 0 auto;
+    margin: 0 auto;
+    max-width: var(--layout-max-width);
 }

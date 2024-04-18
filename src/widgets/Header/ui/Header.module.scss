@@ -6,7 +6,8 @@
     background: rgb(234, 234, 234);
 }
 .content {
-    max-width: 1220px;
+    margin: 0 auto;
+    max-width: var(--layout-max-width);
     height: 100%;
     display: flex;
     justify-content: space-between;
