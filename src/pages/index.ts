@@ -1,1 +1,2 @@
-export * as AuthPage from './AuthPage';
+export * as MainPage from './MainPage';
+export * as ProfilePage from './ProfilePage';

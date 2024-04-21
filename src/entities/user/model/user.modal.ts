@@ -11,3 +11,5 @@ export interface User {
     email: string;
     restoreToken?: string;
 }
+
+export type AuthFormType = 'login' | 'register';

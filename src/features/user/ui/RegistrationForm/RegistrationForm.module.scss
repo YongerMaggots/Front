@@ -5,7 +5,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
 }
 .form {
     border: 1px solid blue;
@@ -23,4 +22,10 @@
 .button {
     width: 100%;
     margin: 20px 0px 0px 0px;
+}
+
+@media screen and (max-width: 560px) {
+    .form {
+        min-width: fit-content;
+    }
 }

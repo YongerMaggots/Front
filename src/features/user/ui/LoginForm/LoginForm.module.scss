@@ -1,0 +1,31 @@
+.container {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.form {
+    // border: 1px solid blue;
+    background: rgb(238, 238, 255);
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 250px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.inputContainer {
+    width: 100%;
+    margin: 10px 0px 0px 0px;
+}
+.button {
+    width: 100%;
+    margin: 20px 0px 0px 0px;
+}
+
+@media screen and (max-width: 560px) {
+    .form {
+        min-width: fit-content;
+    }
+}

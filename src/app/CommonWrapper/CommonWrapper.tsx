@@ -1,16 +1,16 @@
 import {Outlet} from 'react-router-dom';
-import {Header} from '@/widgets';
 import './reset.css';
 import styles from './CommonWrapper.module.scss';
+import {CustomHeader} from '@/widgets';
 
 export const CommonWrapper = () => {
     return (
         <div className={styles.wrapper}>
-            <Header />
+            <CustomHeader />
             <main className={styles.content}>
                 <Outlet />
             </main>
-            {/* <Footer /> */}
+            {/* <CustomFooter /> */}
         </div>
     );
 };
