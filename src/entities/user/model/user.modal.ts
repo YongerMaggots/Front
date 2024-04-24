@@ -15,12 +15,7 @@ export interface User {
     photo?: string;
     role: RoleEnum;
     pets: PetModel.pet[];
-    appointments: {
-        id: AppointmentModel.Appointment['id'];
-        pet: PetModel.pet;
-        ness: number; // TODO: Поменять, когда будет
-        description: string;
-    };
+    appointments: AppointmentModel.Appointment[];
 }
 
 export interface IMyProfile extends User {

@@ -8,7 +8,7 @@ const createAppointmentSlice: StateCreator<
     [['zustand/devtools', never]],
     [],
     AppointmentState
-> = (set, get) => ({});
+> = () => ({});
 
 export const useAppointmentStore = create<AppointmentState>()(
     devtools((...args) => ({ ...createAppointmentSlice(...args) }), {

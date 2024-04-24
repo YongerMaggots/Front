@@ -15,7 +15,7 @@ const createPetSlice: StateCreator<
     [['zustand/devtools', never]],
     [],
     PetState
-> = (set, get) => ({
+> = () => ({
     deletePet: async (id) => {
         try {
             await axios.delete(API.pet.byId(id));
