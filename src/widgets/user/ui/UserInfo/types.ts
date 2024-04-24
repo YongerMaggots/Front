@@ -1,5 +1,10 @@
-import {UserModal} from '@/entities/user/model';
+import { UserModal } from '@/entities/user/model';
 
 type userType = UserModal.User;
 
-export type IProps = Pick<userType, 'id' | 'email' | 'name' | 'surname' | 'photo' | 'role'>;
+export interface UserInfoProps {
+    userData: Nullable<
+        Pick<userType, 'id' | 'email' | 'name' | 'surname' | 'photo' | 'role'>
+    >;
+    my?: boolean;
+}

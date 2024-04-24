@@ -1,7 +1,10 @@
-import {Outlet} from 'react-router-dom';
 import './reset.css';
+import '@/shared/main.module.css';
+
 import styles from './CommonWrapper.module.scss';
-import {CustomHeader} from '@/widgets';
+
+import { Outlet } from 'react-router-dom';
+import { CustomHeader } from '@/widgets';
 
 export const CommonWrapper = () => {
     return (

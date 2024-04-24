@@ -1,0 +1,35 @@
+.user {
+    margin: 40px 0px 0px 0px;
+
+    display: flex;
+    justify-content: space-between;
+}
+.userData {
+    display: flex;
+    gap: 24px;
+}
+.name {
+    margin: 0 !important;
+}
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+@media screen and (max-width: 960px) {
+    .avatar {
+        width: 64px !important;
+        height: 64px !important;
+    }
+    .userData {
+        gap: 12px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .user {
+        flex-direction: column-reverse;
+        gap: 12px;
+    }
+}
