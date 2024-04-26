@@ -6,8 +6,9 @@ import { handlerError } from '@/shared/lib/handle-error';
 import { PetModel } from '.';
 
 export interface PetState {
+    getPetsByUserId: (id: number) => Promise<PetModel.Pet[]>;
     deletePet: (id: number) => Promise<void>;
-    editPet: (id: number, pet: PetModel.pet) => Promise<void>;
+    editPet: (id: number, pet: PetModel.Pet) => Promise<void>;
 }
 
 const createPetSlice: StateCreator<
@@ -16,9 +17,13 @@ const createPetSlice: StateCreator<
     [],
     PetState
 > = () => ({
+    getPetsByUserId: async (id) => {
+        const { data } = await axios.get<PetModel.Pet[]>(API.byId(id));
+        return data;
+    },
     deletePet: async (id) => {
         try {
-            await axios.delete(API.pet.byId(id));
+            await axios.delete(API.byId(id));
         } catch (error) {
             handlerError(error);
         }
@@ -26,7 +31,7 @@ const createPetSlice: StateCreator<
 
     editPet: async (id, pet) => {
         try {
-            await axios.put<PetModel.pet>(API.pet.byId(id), pet);
+            await axios.put<PetModel.Pet>(API.byId(id), pet);
         } catch (error) {
             handlerError(error);
         }

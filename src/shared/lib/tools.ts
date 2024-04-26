@@ -1,10 +1,10 @@
-import { UserModal } from '@/entities/user/model';
+import { UserModel } from '@/entities/user/model';
 
-export const getUserRole = (role: UserModal.RoleEnum) => {
+export const getUserRole = (role: UserModel.RoleEnum) => {
     switch (role) {
-        case UserModal.RoleEnum.admin:
+        case UserModel.RoleEnum.admin:
             return 'Администратор';
-        case UserModal.RoleEnum.doctor:
+        case UserModel.RoleEnum.doctor:
             return 'Доктор';
         default:
             return 'Пользователь';

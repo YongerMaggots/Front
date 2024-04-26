@@ -15,7 +15,6 @@ module.exports = {
             { allowConstantExport: true },
         ],
         'no-console': 'warn',
-        'max-len': [0, 160, 2, { ignoreUrls: true }],
         'react-hooks/exhaustive-deps': 'off',
     },
 };

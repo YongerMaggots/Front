@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { RegistrationForm, LoginForm } from '@/features/user/ui';
-import { UserModal } from '@/entities/user/model';
+import { UserModel } from '@/entities/user/model';
 
 interface IProps {
     isOpen: boolean;
@@ -8,9 +8,9 @@ interface IProps {
 }
 
 export const AuthModal = ({ isOpen, onClose }: IProps) => {
-    const [type, setType] = useState<UserModal.AuthFormType>('login');
+    const [type, setType] = useState<UserModel.AuthFormType>('login');
 
-    const handleChangeForm = (type: UserModal.AuthFormType) => {
+    const handleChangeForm = (type: UserModel.AuthFormType) => {
         setType(type);
     };
 

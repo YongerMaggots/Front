@@ -1,6 +1,3 @@
-import { AppointmentModel } from '@/entities/appointment/model';
-import { PetModel } from '@/entities/pet/model';
-
 export enum RoleEnum {
     admin = 'admin',
     doctor = 'doctor',
@@ -14,8 +11,7 @@ export interface User {
     surname?: string;
     photo?: string;
     role: RoleEnum;
-    pets: PetModel.pet[];
-    appointments: AppointmentModel.Appointment[];
+    phone?: string;
 }
 
 export interface IMyProfile extends User {

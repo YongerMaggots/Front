@@ -1,6 +1,6 @@
 import { Route, createRoutesFromElements } from 'react-router-dom';
 import { CommonWrapper } from './CommonWrapper/CommonWrapper';
-import { MainPage, ProfilePage } from '@/pages';
+import { AppointmentPage, MainPage, NotFoundPage, ProfilePage } from '@/pages';
 
 export const routes = createRoutesFromElements(
     <Route element={<CommonWrapper />}>
@@ -12,5 +12,10 @@ export const routes = createRoutesFromElements(
             </Route>
             <Route path=":profileId" element={<ProfilePage.Profile />} />
         </Route>
+
+        <Route path="/appointment">
+            <Route path="new" element={<AppointmentPage.New />} />
+        </Route>
+        <Route path="*" element={<NotFoundPage />} />
     </Route>
 );

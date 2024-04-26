@@ -17,9 +17,9 @@ export const My = () => {
         <>
             <UserInfo userData={myProfile} my />
             <Divider />
-            <UserPets userData={myProfile} my />
+            <UserPets userId={myProfile.id} my />
             <Divider />
-            <UserAppointment userData={myProfile} my />
+            <UserAppointment userId={myProfile.id} my />
         </>
     );
 };

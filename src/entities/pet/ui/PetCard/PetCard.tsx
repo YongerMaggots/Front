@@ -5,6 +5,8 @@ import { PetCardProps } from './PetCard.types';
 import { getPetImage, getPetTypeName } from '../../lib';
 
 import styles from './PetCard.module.scss';
+import classNames from 'classnames';
+import { CheckCircleTwoTone } from '@ant-design/icons';
 
 const { Title } = Typography;
 
@@ -12,7 +14,11 @@ export const PetCard = ({
     pet,
     onEdit,
     onDelete,
+    onSelect,
     my = false,
+    selected = false,
+    bordered = true,
+    padding = 24,
 }: PetCardProps) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -21,7 +27,7 @@ export const PetCard = ({
             <Modal
                 title="Подтвердите действие"
                 open={isDeleteModalOpen}
-                onOk={() => onDelete(pet.id)}
+                onOk={() => onDelete && onDelete(pet.id)}
                 okText={'Удалить'}
                 onCancel={() => setIsDeleteModalOpen(false)}
                 cancelText={'Отменить'}
@@ -30,7 +36,16 @@ export const PetCard = ({
                 <p>Вы уверены, что хотите удалить питомца?</p>
             </Modal>
 
-            <div className={styles.container}>
+            <div
+                className={classNames(styles.container, {
+                    [styles.bordered]: bordered,
+                    [styles.selected]: selected && onSelect,
+                    [styles.onSelect]: onSelect,
+                })}
+                style={{ padding }}
+                onClick={() => onSelect && onSelect(pet.id)}
+            >
+                {selected && <CheckCircleTwoTone className={styles.check} />}
                 <div className={styles.imageWrapper}>
                     <img
                         src={getPetImage(pet.type)}
@@ -39,7 +54,9 @@ export const PetCard = ({
                     />
                 </div>
                 <div className={styles.petInfo}>
-                    <Title level={3}>{pet.name}</Title>
+                    <Title level={3} className={styles.name}>
+                        {pet.name}
+                    </Title>
                     <Chip>{getPetTypeName(pet.type)}</Chip>
                 </div>
                 {my && (
@@ -47,7 +64,7 @@ export const PetCard = ({
                         <Button
                             className={styles.edit}
                             type="primary"
-                            onClick={() => onEdit(pet.id, pet)}
+                            onClick={() => onEdit && onEdit(pet.id, pet)}
                         >
                             Редактировать
                         </Button>

@@ -1,9 +1,9 @@
-import {UserModal} from '@/entities/user/model';
+import { UserModel } from '@/entities/user/model';
 
 export interface IProps {
     isOpen: boolean;
     onClose: () => void;
-    changeForm: (type: UserModal.AuthFormType) => void;
+    changeForm: (type: UserModel.AuthFormType) => void;
 }
 
 export interface IRegisterForm {

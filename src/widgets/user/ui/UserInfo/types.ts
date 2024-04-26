@@ -1,6 +1,6 @@
-import { UserModal } from '@/entities/user/model';
+import { UserModel } from '@/entities/user/model';
 
-type userType = UserModal.User;
+type userType = UserModel.User;
 
 export interface UserInfoProps {
     userData: Nullable<

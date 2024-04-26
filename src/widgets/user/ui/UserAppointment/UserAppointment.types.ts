@@ -1,8 +1,6 @@
-import { UserModal } from '@/entities/user/model';
-
-type userType = UserModal.User;
+import { UserModel } from '@/entities/user/model';
 
 export interface UserAppointmentProps {
-    userData: Nullable<Pick<userType, 'appointments'>>;
+    userId: UserModel.User['id'];
     my?: boolean;
 }

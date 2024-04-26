@@ -29,7 +29,7 @@ export const CustomHeader = () => {
         },
         {
             key: '2',
-            label: <Link href="/records">Мои записи</Link>,
+            label: <Link href="/appointment/my">Мои записи</Link>,
         },
         {
             key: '3',
@@ -52,7 +52,7 @@ export const CustomHeader = () => {
     const handleAppointment = () => {
         if (!myProfile) return handleOpenModal();
 
-        navigate('/appointment');
+        navigate('/appointment/new');
     };
 
     return (

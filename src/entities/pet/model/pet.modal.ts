@@ -5,7 +5,7 @@ export enum PetEnum {
     bird = 'bird',
 }
 
-export interface pet {
+export interface Pet {
     id: number;
     name: string;
     type: PetEnum;

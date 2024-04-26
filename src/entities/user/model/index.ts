@@ -1,2 +1,2 @@
-export * as UserModal from './user.modal';
-export {useProfileStore} from './profile.state';
+export * as UserModel from './user.modal';
+export { useProfileStore } from './profile.state';

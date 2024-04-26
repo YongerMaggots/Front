@@ -1,0 +1,45 @@
+.container {
+    padding: 24px;
+
+    border: 1px solid var(--gray);
+    border-radius: 20px;
+
+    display: flex;
+    // grid-template-columns: repeat(auto-fill, minmax(175px, 2fr));
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.description {
+    flex: 1 1 auto;
+}
+
+.nessData {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.nessData > li {
+    line-height: 1.2;
+}
+.descriptionText {
+    line-height: 150%;
+}
+.actions {
+    align-self: flex-end;
+}
+
+@media screen and (max-width: 960px) {
+    .container {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+    .actions {
+        align-self: center;
+        width: 100%;
+    }
+    .button {
+        width: 100%;
+        display: block;
+    }
+}

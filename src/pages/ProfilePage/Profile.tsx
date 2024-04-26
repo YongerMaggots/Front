@@ -1,44 +1,55 @@
-import { useProfileStore } from '@/entities/user/model';
+import { UserModel, useProfileStore } from '@/entities/user/model';
 import { handlerError } from '@/shared/lib/handle-error';
-import { UserInfo, UserPets } from '@/widgets';
+import { UserAppointment, UserInfo, UserPets } from '@/widgets';
 import { Divider, Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export const Profile = () => {
-    const { getUserProfile, userProfile, resetUserProfile } = useProfileStore();
-
-    const [isLoading, setIsLoading] = useState(false);
+    const { getUserProfile } = useProfileStore();
+    const [myProfile, setMyProfile] = useState<UserModel.IUserProfile | null>(
+        null
+    );
+    const [isLoading, setIsLoading] = useState(true);
+    const { userId } = useParams();
 
     const navigate = useNavigate();
-    const { profileId } = useParams();
 
-    const getUser = async () => {
+    const handleGetUserProfile = async () => {
+        if (!userId) {
+            return navigate('/404');
+        }
+
         setIsLoading(true);
-        if (!profileId) return;
-
-        getUserProfile(+profileId).catch((error) => {
+        try {
+            const data = await getUserProfile(+userId);
+            setMyProfile(data);
+        } catch (error) {
             handlerError(error);
-            resetUserProfile();
             navigate('/404');
-        });
+        }
         setIsLoading(false);
     };
 
     useEffect(() => {
-        getUser();
-
-        return resetUserProfile();
+        handleGetUserProfile();
     }, []);
 
-    if (isLoading) return <Spin />;
+    if (isLoading) {
+        return <Spin />;
+    }
+
+    if (!myProfile || !userId) {
+        return null;
+    }
 
     return (
         <>
-            <UserInfo userData={userProfile} my />
+            <UserInfo userData={myProfile} />
             <Divider />
-            <UserPets userData={userProfile} my />
+            <UserPets userId={+userId} />
             <Divider />
+            <UserAppointment userId={+userId} />
         </>
     );
 };

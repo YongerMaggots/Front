@@ -11,7 +11,7 @@ export const Notification = (
     const openNotificationWithIcon = (type: NotificationType) => {
         api[type]({
             message,
-            description: 'tesdt',
+            description: 'test',
         });
     };
 
