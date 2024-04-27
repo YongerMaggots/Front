@@ -20,6 +20,8 @@ export interface ProfileState {
 
     myAppointments: Nullable<AppointmentModel.Appointment[]>;
     setMyAppointments: (appointments: AppointmentModel.Appointment[]) => void;
+
+    changeUserRole: (id: UserModel.User['id'], role: RoleEnum) => Promise<void>;
 }
 
 const createProfileSlice: StateCreator<
@@ -33,7 +35,7 @@ const createProfileSlice: StateCreator<
         email: 'example@gmail.ru',
         name: 'Mike',
         surname: 'Green',
-        role: RoleEnum.user,
+        role: RoleEnum.admin,
         restoreToken: '123',
     },
 
@@ -101,6 +103,12 @@ const createProfileSlice: StateCreator<
     ],
     setMyAppointments: (appointments) => {
         set({ myAppointments: appointments });
+    },
+
+    changeUserRole: async (id, role) => {
+        axios.post(API.user.role(id), {
+            role,
+        });
     },
 });
 

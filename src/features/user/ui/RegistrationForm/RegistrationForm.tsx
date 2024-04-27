@@ -1,16 +1,21 @@
-import {IProps, IRegisterForm} from './types';
-import {Controller, useForm} from 'react-hook-form';
-import {App, Button, Input, Modal, Typography} from 'antd';
+import { IProps, IRegisterForm } from './types';
+import { Controller, useForm } from 'react-hook-form';
+import { App, Button, Input, Modal, Typography } from 'antd';
 import styles from './RegistrationForm.module.scss';
+import { useState } from 'react';
 
-const {Text, Title, Link} = Typography;
+const { Text, Title, Link } = Typography;
+const { Password } = Input;
 
-export const RegistrationForm = ({isOpen, onClose, changeForm}: IProps) => {
-    const {message} = App.useApp();
+export const RegistrationForm = ({ isOpen, onClose, changeForm }: IProps) => {
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
+
+    const { message } = App.useApp();
     const {
         handleSubmit,
         control,
-        formState: {errors},
+        formState: { errors },
     } = useForm<IRegisterForm>();
 
     const submit = (data: IRegisterForm) => {
@@ -27,24 +32,88 @@ export const RegistrationForm = ({isOpen, onClose, changeForm}: IProps) => {
                 <form onSubmit={handleSubmit(submit)} className={styles.form}>
                     <Title level={3}>Регистрация</Title>
                     <Text>Имя</Text>
-                    <Controller name='name' control={control} defaultValue='' rules={{required: true}} render={({field}) => <Input {...field} type='text' status={errors.name ? 'error' : ''} />} />
+                    <Controller
+                        name="name"
+                        control={control}
+                        defaultValue=""
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <Input {...field} type="text" status={errors.name ? 'error' : ''} />
+                        )}
+                    />
                     <div className={styles.inputContainer}>
                         <Text>Фамилия</Text>
-                        <Controller name='surname' control={control} defaultValue='' rules={{required: true}} render={({field}) => <Input {...field} type='text' status={errors.surname ? 'error' : ''} />} />
+                        <Controller
+                            name="surname"
+                            control={control}
+                            defaultValue=""
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <Input
+                                    {...field}
+                                    type="text"
+                                    status={errors.surname ? 'error' : ''}
+                                />
+                            )}
+                        />
                     </div>
                     <div className={styles.inputContainer}>
                         <Text>Почта</Text>
-                        <Controller name='email' control={control} defaultValue='' rules={{required: true}} render={({field}) => <Input {...field} type='email' status={errors.email ? 'error' : ''} />} />
+                        <Controller
+                            name="email"
+                            control={control}
+                            defaultValue=""
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <Input
+                                    {...field}
+                                    type="email"
+                                    status={errors.email ? 'error' : ''}
+                                />
+                            )}
+                        />
                     </div>
                     <div className={styles.inputContainer}>
                         <Text>Пароль</Text>
-                        <Controller name='password' control={control} defaultValue='' rules={{required: true}} render={({field}) => <Input {...field} type='password' status={errors.password ? 'error' : ''} />} />
+                        <Controller
+                            name="password"
+                            control={control}
+                            defaultValue=""
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <Password
+                                    {...field}
+                                    visibilityToggle={{
+                                        visible: passwordVisible,
+                                        onVisibleChange: setPasswordVisible,
+                                    }}
+                                    type="password"
+                                    status={errors.password ? 'error' : ''}
+                                />
+                            )}
+                        />
                     </div>
                     <div className={styles.inputContainer}>
                         <Text>Повторите пароль</Text>
-                        <Controller name='repeatPassword' control={control} defaultValue='' rules={{required: true}} render={({field}) => <Input {...field} type='password' status={errors.repeatPassword ? 'error' : ''} />} />
+                        <Controller
+                            name="repeatPassword"
+                            control={control}
+                            defaultValue=""
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <Password
+                                    {...field}
+                                    visibilityToggle={{
+                                        visible: repeatPasswordVisible,
+                                        onVisibleChange: setRepeatPasswordVisible,
+                                    }}
+                                    type="password"
+                                    status={errors.repeatPassword ? 'error' : ''}
+                                />
+                            )}
+                        />
                     </div>
-                    <Button htmlType='submit' className={styles.button} type='primary'>
+                    <Button htmlType="submit" className={styles.button} type="primary">
                         Зарегистрироваться
                     </Button>
                 </form>

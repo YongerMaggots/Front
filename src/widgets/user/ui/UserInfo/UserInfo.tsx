@@ -3,10 +3,11 @@ import { UserInfoProps } from './types';
 import styles from './UserInfo.module.scss';
 import { Avatar, Chip } from '@/shared/ui';
 import { Tools } from '@/shared/lib';
+import { ChangeUserRole } from '@/features/user/ui';
 
 const { Title } = Typography;
 
-export const UserInfo = ({ userData, my = false }: UserInfoProps) => {
+export const UserInfo = ({ userData, my = false, getUser }: UserInfoProps) => {
     if (!userData) {
         return (
             <Title level={1} className={styles.title}>
@@ -37,11 +38,20 @@ export const UserInfo = ({ userData, my = false }: UserInfoProps) => {
                             <Chip>{Tools.getUserRole(userData.role)}</Chip>
                         </div>
                     </div>
-                    {my && (
-                        <Button type="primary" href="/profile/my/edit">
-                            Редактировать
-                        </Button>
-                    )}
+                    <div className={styles.userActions}>
+                        {!my && getUser && (
+                            <ChangeUserRole
+                                userId={userData.id}
+                                currentRole={userData.role}
+                                getUser={getUser}
+                            />
+                        )}
+                        {my && (
+                            <Button type="primary" href="/profile/my/edit">
+                                Редактировать
+                            </Button>
+                        )}
+                    </div>
                 </div>
             </section>
         </>

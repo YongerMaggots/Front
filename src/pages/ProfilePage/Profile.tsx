@@ -7,9 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 export const Profile = () => {
     const { getUserProfile } = useProfileStore();
-    const [myProfile, setMyProfile] = useState<UserModel.IUserProfile | null>(
-        null
-    );
+    const [myProfile, setMyProfile] = useState<UserModel.IUserProfile | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const { userId } = useParams();
 
@@ -45,7 +43,7 @@ export const Profile = () => {
 
     return (
         <>
-            <UserInfo userData={myProfile} />
+            <UserInfo userData={myProfile} getUser={handleGetUserProfile} />
             <Divider />
             <UserPets userId={+userId} />
             <Divider />

@@ -1,15 +1,19 @@
-import {Button, Input, Modal, Typography} from 'antd';
-import {Controller, useForm} from 'react-hook-form';
+import { Button, Input, Modal, Typography } from 'antd';
+import { Controller, useForm } from 'react-hook-form';
 import styles from './LoginForm.module.scss';
-import {ILoginForm, IProps} from './types';
+import { ILoginForm, IProps } from './types';
+import { useState } from 'react';
 
-const {Text, Title, Link} = Typography;
+const { Text, Title, Link } = Typography;
+const { Password } = Input;
 
-export const LoginForm = ({isOpen, onClose, changeForm}: IProps) => {
+export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
+    const [passwordVisible, setPasswordVisible] = useState(false);
+
     const {
         handleSubmit,
         control,
-        formState: {errors},
+        formState: { errors },
     } = useForm<ILoginForm>();
 
     const submit = (data: ILoginForm) => {
@@ -22,17 +26,48 @@ export const LoginForm = ({isOpen, onClose, changeForm}: IProps) => {
                 <form onSubmit={handleSubmit(submit)} className={styles.form}>
                     <Title level={3}>Вход</Title>
                     <Text>Почта</Text>
-                    <Controller name='email' control={control} defaultValue='' rules={{required: true}} render={({field}) => <Input {...field} type='text' placeholder='example@gmail.ru' status={errors.email ? 'error' : ''} />} />
+                    <Controller
+                        name="email"
+                        control={control}
+                        defaultValue=""
+                        rules={{ required: true }}
+                        render={({ field }) => (
+                            <Input
+                                {...field}
+                                type="text"
+                                placeholder="example@gmail.ru"
+                                status={errors.email ? 'error' : ''}
+                            />
+                        )}
+                    />
                     <div className={styles.inputContainer}>
                         <Text>Пароль</Text>
-                        <Controller name='password' control={control} defaultValue='' rules={{required: true}} render={({field}) => <Input {...field} type='password' placeholder='Пароль' status={errors.email ? 'error' : ''} />} />
+                        <Controller
+                            name="password"
+                            control={control}
+                            defaultValue=""
+                            rules={{ required: true }}
+                            render={({ field }) => (
+                                <Password
+                                    {...field}
+                                    visibilityToggle={{
+                                        visible: passwordVisible,
+                                        onVisibleChange: setPasswordVisible,
+                                    }}
+                                    type="password"
+                                    placeholder="Пароль"
+                                    status={errors.email ? 'error' : ''}
+                                />
+                            )}
+                        />
                     </div>
-                    <Button htmlType='submit' className={styles.button} type='primary'>
+                    <Button htmlType="submit" className={styles.button} type="primary">
                         Войти
                     </Button>
                 </form>
                 <Text>
-                    Нет аккаунта? <Link onClick={() => changeForm('register')}>Зарегистрироваться</Link>
+                    Нет аккаунта?{' '}
+                    <Link onClick={() => changeForm('register')}>Зарегистрироваться</Link>
                 </Text>
             </div>
         </Modal>
