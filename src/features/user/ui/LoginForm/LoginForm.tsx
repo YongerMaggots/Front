@@ -3,11 +3,14 @@ import { Controller, useForm } from 'react-hook-form';
 import styles from './LoginForm.module.scss';
 import { ILoginForm, IProps } from './types';
 import { useState } from 'react';
+import { useProfileStore } from '@/entities/user/model';
 
 const { Text, Title, Link } = Typography;
 const { Password } = Input;
 
 export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
+    const { auth, authMe } = useProfileStore();
+
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const {
@@ -16,8 +19,14 @@ export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
         formState: { errors },
     } = useForm<ILoginForm>();
 
-    const submit = (data: ILoginForm) => {
-        console.log(data);
+    const submit = async (data: ILoginForm) => {
+        try {
+            await auth(data);
+            await authMe();
+        } catch (error) {
+            // handlerError();
+            console.log(error);
+        }
     };
 
     return (

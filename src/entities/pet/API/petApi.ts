@@ -3,6 +3,7 @@ import { apiCore } from '@/shared/api';
 const PREFIX = apiCore.PREFIX;
 
 export const API = {
-    my: `${PREFIX}/user/me`,
-    byId: (id: number) => `${PREFIX}/user/${id}`,
+    byPetId: (id: number) => `${PREFIX}/pet/${id}`,
+    byUserId: (id: number) => `${PREFIX}/pet/user/${id}`,
+    byUser: `${PREFIX}/pet/user`,
 };

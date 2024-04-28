@@ -6,32 +6,30 @@ import { handlerError } from '@/shared/lib/handle-error';
 import { PetModel } from '.';
 
 export interface PetState {
+    addNewPet: (pet: Pick<PetModel.Pet, 'name' | 'type' | 'breed'>) => Promise<void>;
     getPetsByUserId: (id: number) => Promise<PetModel.Pet[]>;
     deletePet: (id: number) => Promise<void>;
     editPet: (id: number, pet: PetModel.Pet) => Promise<void>;
 }
 
-const createPetSlice: StateCreator<
-    PetState,
-    [['zustand/devtools', never]],
-    [],
-    PetState
-> = () => ({
+const createPetSlice: StateCreator<PetState, [['zustand/devtools', never]], [], PetState> = () => ({
+    addNewPet: async (pet) => {
+        await axios.post<PetModel.Pet>(API.byUser, pet);
+    },
     getPetsByUserId: async (id) => {
-        const { data } = await axios.get<PetModel.Pet[]>(API.byId(id));
+        const { data } = await axios.get<PetModel.Pet[]>(API.byUserId(id));
         return data;
     },
     deletePet: async (id) => {
         try {
-            await axios.delete(API.byId(id));
+            await axios.delete(API.byPetId(id));
         } catch (error) {
             handlerError(error);
         }
     },
-
     editPet: async (id, pet) => {
         try {
-            await axios.put<PetModel.Pet>(API.byId(id), pet);
+            await axios.put<PetModel.Pet>(API.byPetId(id), pet);
         } catch (error) {
             handlerError(error);
         }

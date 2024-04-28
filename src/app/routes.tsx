@@ -21,7 +21,7 @@ export const routes = createRoutesFromElements(
                 <Route path=":profileId" element={<ProfilePage.Profile />} />
             </Route>
             <Route path="pet">
-                <Route path="edit" element={<PetPage.AddPet />} />
+                <Route path="new" element={<PetPage.New />} />
             </Route>
             <Route path="/appointment">
                 <Route path="new" element={<AppointmentPage.New />} />

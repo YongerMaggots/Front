@@ -1,12 +1,20 @@
+import axios from 'axios';
+type Token = string;
+
 const getDomain = () => {
-    return import.meta.env.domain || window.location.hostname;
+    console.log(import.meta.env.VITE_DOMAIN);
+    return import.meta.env.VITE_DOMAIN || window.location.hostname;
 };
 
-const getApiPrefix = () => {
-    const domain = getDomain();
-    const protocol = domain === 'localhost' ? 'http' : 'https';
-    const port = domain === 'localhost' ? ':3000' : '';
-    return `${protocol}://${domain}${port}/api-v2`;
-};
+export const PREFIX = getDomain();
 
-export const PREFIX = getApiPrefix();
+export function createAxiosRequestInterceptor(getToken: () => Token) {
+    axios.interceptors.request.use(function (config) {
+        const token = getToken();
+        if (token) {
+            config.headers.Authorization = 'Bearer ' + token;
+        }
+
+        return config;
+    });
+}

@@ -4,5 +4,5 @@ const PREFIX = apiCore.PREFIX;
 
 export const API = {
     my: `${PREFIX}/user/me`,
-    byId: (id: number) => `${PREFIX}/user/${id}`,
+    byId: (id: number) => `${PREFIX}/appointment/user/${id}`,
 };

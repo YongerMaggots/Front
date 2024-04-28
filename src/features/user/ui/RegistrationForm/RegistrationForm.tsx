@@ -3,6 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { App, Button, Input, Modal, Typography } from 'antd';
 import styles from './RegistrationForm.module.scss';
 import { useState } from 'react';
+import { useProfileStore } from '@/entities/user/model';
 
 const { Text, Title, Link } = Typography;
 const { Password } = Input;
@@ -11,6 +12,8 @@ export const RegistrationForm = ({ isOpen, onClose, changeForm }: IProps) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
 
+    const { auth, authMe } = useProfileStore();
+
     const { message } = App.useApp();
     const {
         handleSubmit,
@@ -18,12 +21,17 @@ export const RegistrationForm = ({ isOpen, onClose, changeForm }: IProps) => {
         formState: { errors },
     } = useForm<IRegisterForm>();
 
-    const submit = (data: IRegisterForm) => {
+    const submit = async (data: IRegisterForm) => {
         if (data.password !== data.repeatPassword) {
             message.error('Пароли не совпадают');
             return;
         }
-        console.log(data);
+        try {
+            await auth(data);
+            await authMe();
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

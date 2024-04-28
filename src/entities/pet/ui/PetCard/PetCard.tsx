@@ -18,6 +18,7 @@ export const PetCard = ({
     my = false,
     selected = false,
     bordered = true,
+    isChipVisible = true,
     padding = 24,
 }: PetCardProps) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -57,7 +58,7 @@ export const PetCard = ({
                     <Title level={3} className={styles.name}>
                         {pet.name}
                     </Title>
-                    <Chip>{getPetTypeName(pet.type)}</Chip>
+                    {isChipVisible && <Chip>{getPetTypeName(pet.type)}</Chip>}
                 </div>
                 {my && (
                     <div className={styles.actions}>

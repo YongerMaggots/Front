@@ -32,14 +32,14 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
         <section>
             <Title level={1}>Запись на прием</Title>
             <form onSubmit={handleSubmit(submit)} className={styles.form}>
-                <Title level={4} className={styles.formTitle}>
+                <Title level={3} className={styles.formTitle}>
                     Выберите питомца:
                 </Title>
                 <Controller
                     name="petId"
                     control={control}
                     rules={{ required: true }}
-                    defaultValue={myPets[0].id}
+                    defaultValue={myPets.length > 0 ? myPets[0].id : undefined}
                     render={({ field }) => (
                         <div className={styles.petSelect}>
                             {myPets.map((pet) => (
@@ -55,10 +55,10 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                         </div>
                     )}
                 />
-                <Title level={4} className={styles.formTitle}>
+                <Title level={3} className={styles.formTitle}>
                     Выберите врача:
                 </Title>
-                <Title level={4} className={styles.formTitle}>
+                <Title level={3} className={styles.formTitle}>
                     Опишите проблему:
                 </Title>
                 <Controller
@@ -74,7 +74,7 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                         />
                     )}
                 />
-                <Title level={4} className={styles.formTitle}>
+                <Title level={3} className={styles.formTitle}>
                     Выберите дату и время:
                 </Title>
                 <Controller

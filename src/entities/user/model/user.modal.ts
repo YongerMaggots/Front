@@ -15,8 +15,12 @@ export interface User {
 }
 
 export interface IMyProfile extends User {
-    restoreToken?: string;
+    token: string;
 }
+
+export type LoginResponse = {
+    token: string;
+};
 
 export interface IUserProfile extends User {}
 

@@ -9,5 +9,6 @@ export interface Pet {
     id: number;
     name: string;
     type: PetEnum;
+    breed: string;
     ownerId: number;
 }
