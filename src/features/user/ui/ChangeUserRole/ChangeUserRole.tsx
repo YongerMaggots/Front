@@ -15,8 +15,13 @@ export const ChangeUserRole = ({ userId, currentRole, getUser }: ChangeUserRoleP
 
     const handleChangeRole = async () => {
         try {
-            await changeUserRole(userId, selectedRole);
-            await getUser();
+            try {
+                await changeUserRole(userId, selectedRole);
+                await getUser();
+            } catch (error) {
+                handlerError(error);
+            }
+            setIsSelectOpen(false);
         } catch (error) {
             handlerError(error);
         }

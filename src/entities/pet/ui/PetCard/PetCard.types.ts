@@ -10,4 +10,5 @@ export interface PetCardProps {
     bordered?: boolean;
     isChipVisible?: boolean;
     padding?: number;
+    error?: boolean;
 }

@@ -4,6 +4,7 @@ import styles from './LoginForm.module.scss';
 import { ILoginForm, IProps } from './types';
 import { useState } from 'react';
 import { useProfileStore } from '@/entities/user/model';
+import { handlerError } from '@/shared/lib/handle-error';
 
 const { Text, Title, Link } = Typography;
 const { Password } = Input;
@@ -23,9 +24,9 @@ export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
         try {
             await auth(data);
             await authMe();
+            onClose();
         } catch (error) {
-            // handlerError();
-            console.log(error);
+            handlerError(error);
         }
     };
 

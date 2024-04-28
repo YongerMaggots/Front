@@ -1,4 +1,4 @@
-export enum PetEnum {
+export enum PetTypeEnum {
     cat = 'cat',
     dog = 'dog',
     rabbit = 'rabbit',
@@ -8,7 +8,7 @@ export enum PetEnum {
 export interface Pet {
     id: number;
     name: string;
-    type: PetEnum;
+    type: PetTypeEnum;
     breed: string;
     ownerId: number;
 }

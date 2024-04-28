@@ -16,6 +16,7 @@ export const PetCard = ({
     onDelete,
     onSelect,
     my = false,
+    error = false,
     selected = false,
     bordered = true,
     isChipVisible = true,
@@ -23,12 +24,19 @@ export const PetCard = ({
 }: PetCardProps) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+    const handleDelete = () => {
+        if (onDelete) {
+            onDelete(pet.id);
+            setIsDeleteModalOpen(false);
+        }
+    };
+
     return (
         <>
             <Modal
                 title="Подтвердите действие"
                 open={isDeleteModalOpen}
-                onOk={() => onDelete && onDelete(pet.id)}
+                onOk={handleDelete}
                 okText={'Удалить'}
                 onCancel={() => setIsDeleteModalOpen(false)}
                 cancelText={'Отменить'}
@@ -42,6 +50,7 @@ export const PetCard = ({
                     [styles.bordered]: bordered,
                     [styles.selected]: selected && onSelect,
                     [styles.onSelect]: onSelect,
+                    [styles.error]: error,
                 })}
                 style={{ padding }}
                 onClick={() => onSelect && onSelect(pet.id)}
@@ -62,18 +71,18 @@ export const PetCard = ({
                 </div>
                 {my && (
                     <div className={styles.actions}>
-                        <Button
+                        {/* <Button
                             className={styles.edit}
                             type="primary"
                             onClick={() => onEdit && onEdit(pet.id, pet)}
                         >
                             Редактировать
-                        </Button>
+                        </Button> */}
                         <Button
                             danger
                             type="primary"
                             className={styles.delete}
-                            onClick={() => setIsDeleteModalOpen(true)}
+                            onClick={() => onDelete && setIsDeleteModalOpen(true)}
                         >
                             Удалить
                         </Button>

@@ -18,6 +18,9 @@
     cursor: pointer;
     position: relative;
 }
+.container.error {
+    border: 1px solid red !important;
+}
 .check {
     position: absolute;
     top: -6px;

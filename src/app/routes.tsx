@@ -22,6 +22,7 @@ export const routes = createRoutesFromElements(
             </Route>
             <Route path="pet">
                 <Route path="new" element={<PetPage.New />} />
+                {/* <Route path="edit/:petId" element={<PetPage.Edit />} /> */}
             </Route>
             <Route path="/appointment">
                 <Route path="new" element={<AppointmentPage.New />} />

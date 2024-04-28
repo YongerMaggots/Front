@@ -4,6 +4,7 @@ import { App, Button, Input, Modal, Typography } from 'antd';
 import styles from './RegistrationForm.module.scss';
 import { useState } from 'react';
 import { useProfileStore } from '@/entities/user/model';
+import { handlerError } from '@/shared/lib/handle-error';
 
 const { Text, Title, Link } = Typography;
 const { Password } = Input;
@@ -29,8 +30,9 @@ export const RegistrationForm = ({ isOpen, onClose, changeForm }: IProps) => {
         try {
             await auth(data);
             await authMe();
+            onClose();
         } catch (error) {
-            console.log(error);
+            handlerError(error);
         }
     };
 

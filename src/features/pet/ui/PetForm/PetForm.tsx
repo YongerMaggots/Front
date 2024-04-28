@@ -63,6 +63,7 @@ export const PetForm = () => {
                                 <PetCard
                                     {...field}
                                     pet={pet}
+                                    error={Boolean(errors.type)}
                                     onSelect={() => field.onChange(pet.type)}
                                     selected={field.value === pet.type}
                                     isChipVisible={false}
