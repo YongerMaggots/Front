@@ -17,6 +17,8 @@ export interface ProfileState {
 
     getUserProfile: (id: UserModel.User['id']) => Promise<UserModel.IUserProfile>;
 
+    getDoctor: (limit: number, offset: number) => Promise<UserModel.Doctor[]>;
+
     myPets: Nullable<PetModel.Pet[]>;
     setMyPets: (pets: PetModel.Pet[]) => void;
 
@@ -64,7 +66,15 @@ const createProfileSlice: StateCreator<
         const { data } = await axios.get<UserModel.IUserProfile>(API.user.byId(id));
         return data;
     },
-
+    getDoctor: async (limit, offset) => {
+        const { data } = await axios.get<UserModel.Doctor[]>(API.doctor.byParams, {
+            params: {
+                limit: limit,
+                offset: offset,
+            },
+        });
+        return data;
+    },
     resetMyProfile: () => {
         set({ myProfile: null, myPets: null, myAppointments: null, token: null });
     },
@@ -80,7 +90,7 @@ const createProfileSlice: StateCreator<
     },
 
     changeUserRole: async (id, role) => {
-        axios.post(API.user.role(id), {
+        await axios.put(API.user.role(id), {
             role,
         });
     },

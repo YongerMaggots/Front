@@ -5,7 +5,7 @@ import { Button, Typography } from 'antd';
 
 const { Title } = Typography;
 
-export const AppointmentCard = ({ appointment, my = false }: AppointmentCardProps) => {
+export const AppointmentCard = ({ onDelete, appointment, my = false }: AppointmentCardProps) => {
     const ness = appointment.ness;
     return (
         <div className={styles.container}>
@@ -36,9 +36,14 @@ export const AppointmentCard = ({ appointment, my = false }: AppointmentCardProp
                 </Title>
                 <p className={styles.descriptionText}>{appointment.description}</p>
             </div>
-            {my && (
+            {my && onDelete && (
                 <div className={styles.actions}>
-                    <Button danger type="primary" className={styles.button}>
+                    <Button
+                        danger
+                        type="primary"
+                        className={styles.button}
+                        onClick={() => onDelete(appointment.id)}
+                    >
                         Отменить запись
                     </Button>
                 </div>

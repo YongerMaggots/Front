@@ -6,12 +6,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export const Profile = () => {
-    const { getUserProfile } = useProfileStore();
-    const [myProfile, setMyProfile] = useState<UserModel.IUserProfile | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const { userId } = useParams();
-
     const navigate = useNavigate();
+
+    const [isLoading, setIsLoading] = useState(true);
+    const { getUserProfile } = useProfileStore();
+    const [userProfile, setUserProfile] = useState<UserModel.IUserProfile | null>(null);
+
+    const { userId } = useParams();
 
     const handleGetUserProfile = async () => {
         if (!userId) {
@@ -21,12 +22,12 @@ export const Profile = () => {
         setIsLoading(true);
         try {
             const data = await getUserProfile(+userId);
-            setMyProfile(data);
+            setUserProfile(data);
+            setIsLoading(false);
         } catch (error) {
             handlerError(error);
             navigate('/404');
         }
-        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -37,13 +38,13 @@ export const Profile = () => {
         return <Spin />;
     }
 
-    if (!myProfile || !userId) {
+    if (!userProfile || !userId) {
         return null;
     }
 
     return (
         <>
-            <UserInfo userData={myProfile} getUser={handleGetUserProfile} />
+            <UserInfo userData={userProfile} getUser={handleGetUserProfile} />
             <Divider />
             <UserPets userId={+userId} />
             <Divider />

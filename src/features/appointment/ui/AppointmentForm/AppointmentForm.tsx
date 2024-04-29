@@ -1,26 +1,50 @@
-import { Button, DatePicker, Input, Typography } from 'antd';
+import { useEffect, useState } from 'react';
+import { Button, Input, Typography } from 'antd';
 import { AppointmentFormProps, AppointmentFormType } from './AppointmentForm.types';
-import styles from './AppointmentForm.module.scss';
 import { Controller, useForm } from 'react-hook-form';
-import { useProfileStore } from '@/entities/user/model';
+import { UserModel, useProfileStore } from '@/entities/user/model';
 import { PetCard } from '@/entities/pet/ui';
 import { useNavigate } from 'react-router-dom';
 import { AddNewPetButton } from '@/features/pet/ui';
+import { DoctorCard } from '@/entities/user/ui';
+import { handlerError } from '@/shared/lib/handle-error';
+import styles from './AppointmentForm.module.scss';
+import { useAppointmentStore } from '@/entities/appointment/model';
 
 const { Title } = Typography;
 const { TextArea } = Input;
+
 export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
-    const { myPets } = useProfileStore();
     console.log(edit);
+    const [doctor, setDoctor] = useState<UserModel.Doctor[]>([]);
+    const navigate = useNavigate();
+    const { newAppointment } = useAppointmentStore();
+    const { myPets, getDoctor } = useProfileStore();
     const {
         handleSubmit,
         control,
         formState: { errors },
     } = useForm<AppointmentFormType>();
-    const navigate = useNavigate();
+
+    useEffect(() => {
+        handleGetDoctor();
+    }, []);
+
+    const handleGetDoctor = async () => {
+        try {
+            const doctor = await getDoctor(0, 10);
+            setDoctor(doctor);
+        } catch (error) {
+            handlerError(error);
+        }
+    };
 
     const submit = (data: AppointmentFormType) => {
-        console.log(data);
+        try {
+            newAppointment(data);
+        } catch (error) {
+            handlerError(error);
+        }
     };
 
     if (!myPets) {
@@ -58,6 +82,24 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                 <Title level={3} className={styles.formTitle}>
                     Выберите врача:
                 </Title>
+                <Controller
+                    name="doctorId"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                        <div className={styles.nessList}>
+                            {doctor.map((doctor) => (
+                                <DoctorCard
+                                    {...field}
+                                    key={doctor.id}
+                                    doctor={doctor}
+                                    selected={field.value === doctor.id}
+                                    onSelect={(id) => field.onChange(id)}
+                                />
+                            ))}
+                        </div>
+                    )}
+                />
                 <Title level={3} className={styles.formTitle}>
                     Опишите проблему:
                 </Title>
@@ -74,7 +116,7 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                         />
                     )}
                 />
-                <Title level={3} className={styles.formTitle}>
+                {/* <Title level={3} className={styles.formTitle}>
                     Выберите дату и время:
                 </Title>
                 <Controller
@@ -90,7 +132,7 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                             placeholder="Выберите дату"
                         />
                     )}
-                />
+                /> */}
                 <div className={styles.actions}>
                     <Button type="primary" htmlType="submit" className={styles.button}>
                         Записаться

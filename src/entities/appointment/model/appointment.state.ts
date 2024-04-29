@@ -6,6 +6,7 @@ import { AppointmentModel } from '.';
 
 export interface AppointmentState {
     getAppointmentById: (id: number) => Promise<AppointmentModel.Appointment[]>;
+    newAppointment: (data: AppointmentModel.NewAppointmentFormType) => Promise<void>;
 }
 
 const createAppointmentSlice: StateCreator<
@@ -15,10 +16,11 @@ const createAppointmentSlice: StateCreator<
     AppointmentState
 > = () => ({
     getAppointmentById: async (id) => {
-        const { data } = await axios.get<AppointmentModel.Appointment[]>(
-            API.byId(id)
-        );
+        const { data } = await axios.get<AppointmentModel.Appointment[]>(API.byId(id));
         return data;
+    },
+    newAppointment: async (data) => {
+        await axios.post(API.byUser, data);
     },
 });
 

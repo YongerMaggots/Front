@@ -4,6 +4,8 @@
     min-height: 100vh;
 }
 .content {
+    padding: 20px 0;
+
     flex: 1 0 auto;
     margin: 0 auto;
     max-width: var(--layout-max-width);

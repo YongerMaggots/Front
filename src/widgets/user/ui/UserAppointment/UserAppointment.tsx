@@ -12,8 +12,12 @@ const { Title } = Typography;
 
 export const UserAppointment = ({ userId, my = false }: UserAppointmentProps) => {
     const { getAppointmentById } = useAppointmentStore();
-    const [appointments, setAppointments] = useState<AppointmentModel.Appointment[]>([]);
+    const [appointments, setAppointments] = useState<AppointmentModel.Appointment[]>();
     const [isLoading, setIsLoading] = useState(false);
+
+    const handleDelete = (id: number) => {
+        setAppointments((prev) => prev && prev.filter((appointment) => appointment.id !== id));
+    };
 
     const handleGetAppointments = async () => {
         setIsLoading(true);
@@ -38,7 +42,7 @@ export const UserAppointment = ({ userId, my = false }: UserAppointmentProps) =>
     if (!appointments) {
         return (
             <Title level={1} className={styles.title}>
-                Записи не найдены не найден
+                Пользователь не найден
             </Title>
         );
     }
@@ -46,13 +50,19 @@ export const UserAppointment = ({ userId, my = false }: UserAppointmentProps) =>
     return (
         <div className={styles.container}>
             <Title level={2} className={styles.title}>
-                {my ? 'Мой записи' : 'Записи'} ко врачу
+                {my ? 'Мой записи' : 'Записи'} к врачу
             </Title>
             <div className={styles.appointmentsContainer}>
+                {!my && appointments.length === 0 && <Title level={4}>Записи не найдены</Title>}
                 {appointments.map((appointment) => (
-                    <AppointmentCard appointment={appointment} key={appointment.id} my />
+                    <AppointmentCard
+                        appointment={appointment}
+                        key={appointment.id}
+                        my
+                        onDelete={handleDelete}
+                    />
                 ))}
-                <AddNewAppointmentButton />
+                {my && <AddNewAppointmentButton />}
             </div>
         </div>
     );

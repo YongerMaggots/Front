@@ -5,6 +5,7 @@ import styles from './RegistrationForm.module.scss';
 import { useState } from 'react';
 import { useProfileStore } from '@/entities/user/model';
 import { handlerError } from '@/shared/lib/handle-error';
+import { useNavigate } from 'react-router-dom';
 
 const { Text, Title, Link } = Typography;
 const { Password } = Input;
@@ -14,6 +15,7 @@ export const RegistrationForm = ({ isOpen, onClose, changeForm }: IProps) => {
     const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
 
     const { auth, authMe } = useProfileStore();
+    const navigate = useNavigate();
 
     const { message } = App.useApp();
     const {
@@ -31,6 +33,7 @@ export const RegistrationForm = ({ isOpen, onClose, changeForm }: IProps) => {
             await auth(data);
             await authMe();
             onClose();
+            navigate('/profile/my');
         } catch (error) {
             handlerError(error);
         }

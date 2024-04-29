@@ -1,7 +1,7 @@
 export enum RoleEnum {
     admin = 'admin',
     doctor = 'doctor',
-    user = 'user',
+    user = 'client',
 }
 
 export interface User {
@@ -13,6 +13,8 @@ export interface User {
     role: RoleEnum;
     phone?: string;
 }
+
+export interface Doctor extends User {}
 
 export interface IMyProfile extends User {
     token: string;

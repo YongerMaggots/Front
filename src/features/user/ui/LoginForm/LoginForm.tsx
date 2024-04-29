@@ -5,6 +5,7 @@ import { ILoginForm, IProps } from './types';
 import { useState } from 'react';
 import { useProfileStore } from '@/entities/user/model';
 import { handlerError } from '@/shared/lib/handle-error';
+import { useNavigate } from 'react-router-dom';
 
 const { Text, Title, Link } = Typography;
 const { Password } = Input;
@@ -13,6 +14,8 @@ export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
     const { auth, authMe } = useProfileStore();
 
     const [passwordVisible, setPasswordVisible] = useState(false);
+
+    const navigate = useNavigate();
 
     const {
         handleSubmit,
@@ -25,6 +28,7 @@ export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
             await auth(data);
             await authMe();
             onClose();
+            navigate('/profile/28');
         } catch (error) {
             handlerError(error);
         }

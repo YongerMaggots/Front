@@ -18,14 +18,14 @@ export const routes = createRoutesFromElements(
                     <Route index element={<ProfilePage.My />} />
                     <Route path="edit" element={<ProfilePage.Edit />} />
                 </Route>
-                <Route path=":profileId" element={<ProfilePage.Profile />} />
+                <Route path=":userId" element={<ProfilePage.Profile />} />
             </Route>
             <Route path="pet">
                 <Route path="new" element={<PetPage.New />} />
-                {/* <Route path="edit/:petId" element={<PetPage.Edit />} /> */}
             </Route>
             <Route path="/appointment">
                 <Route path="new" element={<AppointmentPage.New />} />
+                <Route path="my" element={<AppointmentPage.My />} />
             </Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />

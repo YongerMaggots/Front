@@ -33,8 +33,9 @@ export const UserPets = ({ my, userId }: UserPetsProps) => {
         setIsLoading((prev) => !prev);
     };
 
-    const handleDelete = (id: number) => {
-        deletePet(id);
+    const handleDelete = async (id: number) => {
+        await deletePet(id);
+        await handleGetPets();
     };
 
     if (isLoading) return <Spin />;
@@ -53,6 +54,7 @@ export const UserPets = ({ my, userId }: UserPetsProps) => {
                 {my ? 'Мои питомцы' : 'Питомцы'}
             </Title>
             <div className={styles.petsCards}>
+                {!my && pets.length === 0 && <Title level={4}>Питомцев нет</Title>}
                 {pets.map((pet) => (
                     <PetCard
                         key={pet.id}
@@ -62,7 +64,7 @@ export const UserPets = ({ my, userId }: UserPetsProps) => {
                         my
                     />
                 ))}
-                <AddNewPetButton />
+                {my && <AddNewPetButton />}
             </div>
         </>
     );

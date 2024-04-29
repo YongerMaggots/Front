@@ -8,3 +8,8 @@ export interface Appointment {
     description: string;
     date: string;
 }
+
+export type NewAppointmentFormType = Pick<Appointment, 'description'> & {
+    petId: number;
+    doctorId: number;
+};

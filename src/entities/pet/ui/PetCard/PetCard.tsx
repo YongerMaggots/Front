@@ -12,7 +12,7 @@ const { Title } = Typography;
 
 export const PetCard = ({
     pet,
-    onEdit,
+    // onEdit,
     onDelete,
     onSelect,
     my = false,
