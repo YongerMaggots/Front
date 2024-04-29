@@ -3,6 +3,7 @@ import { IEditProfileForm } from './EditProfileForm.types';
 import { Button, Input, Typography } from 'antd';
 import { useProfileStore } from '@/entities/user/model';
 import styles from './EditProfileForm.module.scss';
+import { handlerError } from '@/shared/lib/handle-error';
 
 const { Title } = Typography;
 
@@ -13,9 +14,14 @@ export const EditProfileForm = () => {
         reset,
         formState: { errors },
     } = useForm<IEditProfileForm>();
-    const { myProfile } = useProfileStore();
+    const { myProfile, editProfile } = useProfileStore();
+
     const submit = (data: IEditProfileForm) => {
-        console.log(data);
+        try {
+            editProfile(data);
+        } catch (error) {
+            handlerError(error);
+        }
     };
 
     return (

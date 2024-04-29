@@ -1,7 +1,7 @@
 import { useProfileStore } from '@/entities/user/model';
 import { UserAppointment } from '@/widgets';
 
-export const My = () => {
+export const MyPage = () => {
     const { myProfile } = useProfileStore();
 
     if (!myProfile) return null;

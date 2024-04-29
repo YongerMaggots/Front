@@ -13,7 +13,6 @@ const { Link, Text } = Typography;
 export const CustomHeader = () => {
     const { myProfile, resetMyProfile } = useProfileStore();
     const logout = () => {
-        console.log('Вышли из аккаунта');
         resetMyProfile();
         navigate('/');
     };

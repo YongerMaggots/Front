@@ -9,10 +9,12 @@ import { AppointmentModel, useAppointmentStore } from '@/entities/appointment/mo
 
 export interface ProfileState {
     token: string | null;
-    auth: (data: { [key: string]: string }) => Promise<void>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    auth: (data: any) => Promise<void>;
+    authMe: () => Promise<void>;
 
     myProfile: Nullable<UserModel.IMyProfile>;
-    authMe: () => Promise<void>;
+    editProfile: (data: UserModel.EditProfileFormType) => Promise<void>;
     resetMyProfile: () => void;
 
     getUserProfile: (id: UserModel.User['id']) => Promise<UserModel.IUserProfile>;
@@ -65,6 +67,9 @@ const createProfileSlice: StateCreator<
     getUserProfile: async (id) => {
         const { data } = await axios.get<UserModel.IUserProfile>(API.user.byId(id));
         return data;
+    },
+    editProfile: async (data) => {
+        await axios.put(API.user.my, data);
     },
     getDoctor: async (limit, offset) => {
         const { data } = await axios.get<UserModel.Doctor[]>(API.doctor.byParams, {

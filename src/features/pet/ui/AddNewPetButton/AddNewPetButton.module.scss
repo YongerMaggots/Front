@@ -9,7 +9,9 @@
     align-items: center;
     justify-content: center;
 }
-
+.container.error {
+    border: 1px solid red !important;
+}
 .button {
     height: 64px;
     width: 64px;

@@ -1,21 +1,15 @@
-import { notification } from 'antd';
+import { App } from 'antd';
 import { useEffect } from 'react';
-
-type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
 export const Notification = (
     type: 'success' | 'info' | 'warning' | 'error',
-    message: string
+    messageText: string
 ) => {
-    const [api] = notification.useNotification();
-    const openNotificationWithIcon = (type: NotificationType) => {
-        api[type]({
-            message,
-            description: 'test',
-        });
-    };
+    const { message } = App.useApp();
 
     useEffect(() => {
-        openNotificationWithIcon(type);
-    }, []);
+        message[type](messageText);
+        console.log(type, messageText);
+    }, [message]);
+    return <></>;
 };

@@ -39,9 +39,10 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
         }
     };
 
-    const submit = (data: AppointmentFormType) => {
+    const submit = async (data: AppointmentFormType) => {
         try {
-            newAppointment(data);
+            await newAppointment(data);
+            navigate('/profile/my');
         } catch (error) {
             handlerError(error);
         }
@@ -72,10 +73,13 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                                     key={pet.id}
                                     pet={pet}
                                     selected={field.value === pet.id}
+                                    error={errors.petId ? true : false}
                                     onSelect={(id) => field.onChange(id)}
                                 />
                             ))}
-                            <AddNewPetButton />
+                            <AddNewPetButton
+                                error={errors.petId && myPets.length === 0 ? true : false}
+                            />
                         </div>
                     )}
                 />
@@ -94,6 +98,7 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                                     key={doctor.id}
                                     doctor={doctor}
                                     selected={field.value === doctor.id}
+                                    error={errors.doctorId ? true : false}
                                     onSelect={(id) => field.onChange(id)}
                                 />
                             ))}

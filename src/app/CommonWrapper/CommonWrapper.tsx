@@ -13,7 +13,6 @@ export const CommonWrapper = () => {
             <main className={styles.content}>
                 <Outlet />
             </main>
-            {/* <CustomFooter /> */}
         </div>
     );
 };

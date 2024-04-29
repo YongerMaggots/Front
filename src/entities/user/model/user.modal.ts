@@ -24,6 +24,8 @@ export type LoginResponse = {
     token: string;
 };
 
+export type EditProfileFormType = Pick<User, 'name' | 'surname' | 'email' | 'phone'>;
+
 export interface IUserProfile extends User {}
 
 export type AuthFormType = 'login' | 'register';

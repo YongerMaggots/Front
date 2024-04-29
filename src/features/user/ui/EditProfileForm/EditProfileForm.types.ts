@@ -1,3 +1,3 @@
 import { UserModel } from '@/entities/user/model';
 
-export type IEditProfileForm = UserModel.IMyProfile;
+export type IEditProfileForm = UserModel.EditProfileFormType;

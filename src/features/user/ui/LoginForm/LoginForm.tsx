@@ -28,7 +28,7 @@ export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
             await auth(data);
             await authMe();
             onClose();
-            navigate('/profile/28');
+            navigate('/profile');
         } catch (error) {
             handlerError(error);
         }

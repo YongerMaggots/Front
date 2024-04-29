@@ -1,8 +1,9 @@
 import { Popover } from 'antd';
 import styles from './AddNewPetButton.module.scss';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 
-export const AddNewPetButton = () => {
+export const AddNewPetButton = ({ error }: { error?: boolean }) => {
     const navigate = useNavigate();
 
     const handleNavigateToPet = () => {
@@ -11,7 +12,12 @@ export const AddNewPetButton = () => {
 
     return (
         <Popover content={<>Добавить нового питомца</>}>
-            <button className={styles.container} onClick={handleNavigateToPet}>
+            <button
+                className={classNames(styles.container, {
+                    [styles.error]: error,
+                })}
+                onClick={handleNavigateToPet}
+            >
                 <button className={styles.button}>+</button>
             </button>
         </Popover>
