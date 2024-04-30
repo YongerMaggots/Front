@@ -6,6 +6,7 @@ import { AuthModal } from '@/widgets/user/ui';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Tools } from '@/shared/lib';
+import { RoleEnum } from '@/entities/user/model/user.modal';
 
 const { Header } = Layout;
 const { Link, Text } = Typography;
@@ -18,6 +19,8 @@ export const CustomHeader = () => {
     };
 
     const navigate = useNavigate();
+
+    const isDoctor = myProfile?.role === RoleEnum.doctor;
 
     const [isAuthModalOpened, setIsAuthModalOpened] = useState(false);
 
@@ -51,7 +54,11 @@ export const CustomHeader = () => {
     const handleAppointment = () => {
         if (!myProfile) return handleOpenModal();
 
-        navigate('/appointment/new');
+        if (isDoctor) {
+            return navigate('/appointment/my');
+        }
+
+        return navigate('/appointment/new');
     };
 
     return (
@@ -64,7 +71,7 @@ export const CustomHeader = () => {
                     </Link>
                     <nav className={styles.nav}>
                         <Button type="primary" onClick={handleAppointment}>
-                            Записаться к врачу
+                            {isDoctor ? 'Мои записи' : 'Записаться к врачу'}
                         </Button>
                         <div className={styles.profile}>
                             {myProfile ? (
@@ -74,7 +81,7 @@ export const CustomHeader = () => {
                                         src={myProfile.photo}
                                         className={styles.avatar}
                                     >
-                                        {Tools.getFirstLetter(myProfile.name)}
+                                        {myProfile.name && Tools.getFirstLetter(myProfile.name)}
                                     </Avatar>
                                 </Dropdown>
                             ) : (

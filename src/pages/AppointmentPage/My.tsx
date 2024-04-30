@@ -1,10 +1,24 @@
 import { useProfileStore } from '@/entities/user/model';
-import { UserAppointment } from '@/widgets';
+import { RoleEnum } from '@/entities/user/model/user.modal';
+import { DoctorAppointment, UserAppointment } from '@/widgets';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const MyPage = () => {
+export const My = () => {
     const { myProfile } = useProfileStore();
+    const navigate = useNavigate();
 
-    if (!myProfile) return null;
+    useEffect(() => {
+        !myProfile && navigate('/404');
+    }, [myProfile]);
+
+    if (!myProfile) {
+        return <></>;
+    }
+
+    if (myProfile.role === RoleEnum.doctor) {
+        return <DoctorAppointment />;
+    }
 
     return <UserAppointment userId={myProfile.id} my />;
 };

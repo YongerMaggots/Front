@@ -1,0 +1,46 @@
+.toast-wrapper {
+    border-radius: 8px;
+    border: 1px solid var(--primary);
+    background: red;
+    margin: 0 !important;
+    padding: 0 !important;
+    cursor: pointer;
+}
+
+.toast-wrapper > div {
+    margin: 0;
+}
+
+.icon {
+    width: 40px;
+}
+
+.toast {
+    display: flex;
+    color: black;
+}
+
+.icon-wrapper {
+    padding: 24px;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success {
+    background: var(--green);
+}
+
+.warning {
+    background: var(--red);
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 18px;
+    line-height: 1.2;
+    padding: 24px;
+}

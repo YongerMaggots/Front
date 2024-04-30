@@ -21,6 +21,17 @@
 .container.error {
     border: 1px solid red !important;
 }
+.petAdditionalInfo {
+    display: flex;
+    flex-direction: column;
+}
+.adInfoItem > b {
+    margin: 0px 4px 0px 0px;
+}
+.kind {
+    display: block;
+    margin: 12px 0px 0px 0px;
+}
 .check {
     position: absolute;
     top: -6px;

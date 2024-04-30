@@ -5,10 +5,25 @@
     border-radius: 20px;
 
     display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.otherInfo {
+    display: flex;
     flex-wrap: wrap;
     gap: 12px;
 }
-
+.date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.date > .subtitle {
+    margin: 0 !important;
+    line-height: 110%;
+}
+.date > .dateText {
+}
 .description {
     flex: 1 1 auto;
 }

@@ -27,36 +27,40 @@ export const getPetTypeName = (type: PetTypeEnum) => {
         case PetTypeEnum.bird:
             return 'Птица';
         default:
-            return 'Киборг-убийца';
+            return 'Без типа';
     }
 };
 
 export const petVariants: PetModel.Pet[] = [
     {
         id: 1,
+        age: 5,
         name: 'Кот',
-        type: PetTypeEnum.cat,
+        kind: PetTypeEnum.cat,
         breed: 'Латыш',
         ownerId: 1,
     },
     {
         id: 2,
+        age: 5,
         name: 'Собака',
-        type: PetTypeEnum.dog,
+        kind: PetTypeEnum.dog,
         breed: 'Шпиц',
         ownerId: 1,
     },
     {
         id: 3,
+        age: 5,
         name: 'Кролик',
-        type: PetTypeEnum.rabbit,
+        kind: PetTypeEnum.rabbit,
         breed: 'Серояйций',
         ownerId: 1,
     },
     {
         id: 4,
+        age: 5,
         name: 'Птица',
-        type: PetTypeEnum.bird,
+        kind: PetTypeEnum.bird,
         breed: 'Голубая',
         ownerId: 1,
     },

@@ -6,12 +6,8 @@ import styles from './Avatar.module.scss';
 
 export const Avatar = ({ src, size, name, className }: AvatarProps) => {
     return (
-        <AntdAvatar
-            src={src}
-            size={size}
-            className={classNames(styles.avatar, className)}
-        >
-            {Tools.getFirstLetter(name)}
+        <AntdAvatar src={src} size={size} className={classNames(styles.avatar, className)}>
+            {name && Tools.getFirstLetter(name)}
         </AntdAvatar>
     );
 };

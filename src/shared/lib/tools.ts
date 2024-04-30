@@ -14,3 +14,9 @@ export const getUserRole = (role: UserModel.RoleEnum) => {
 export const getFirstLetter = (str: string) => {
     return str.charAt(0).toUpperCase();
 };
+
+export const intlDateFormat = (date: string | Date, options?: Intl.DateTimeFormatOptions) => {
+    const currentDate = typeof date === 'string' ? new Date(date) : date;
+    const formatter = new Intl.DateTimeFormat('ru', options);
+    return formatter.format(currentDate);
+};

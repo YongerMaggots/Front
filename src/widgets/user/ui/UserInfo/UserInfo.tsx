@@ -11,7 +11,7 @@ export const UserInfo = ({ userData, my = false, getUser }: UserInfoProps) => {
     if (!userData) {
         return (
             <Title level={1} className={styles.title}>
-                Пользователь не найден
+                Ошибка загрузки данных
             </Title>
         );
     }

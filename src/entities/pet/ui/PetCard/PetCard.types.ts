@@ -8,7 +8,7 @@ export interface PetCardProps {
     my?: boolean;
     selected?: boolean;
     bordered?: boolean;
-    isChipVisible?: boolean;
+    isInfoVisible?: boolean;
     padding?: number;
     error?: boolean;
 }

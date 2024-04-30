@@ -1,7 +1,7 @@
 import { UserModel, useProfileStore } from '@/entities/user/model';
 import { handlerError } from '@/shared/lib/handle-error';
 import { UserAppointment, UserInfo, UserPets } from '@/widgets';
-import { Divider, Spin } from 'antd';
+import { Spin } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -45,9 +45,7 @@ export const Profile = () => {
     return (
         <>
             <UserInfo userData={userProfile} getUser={handleGetUserProfile} />
-            <Divider />
             <UserPets userId={+userId} />
-            <Divider />
             <UserAppointment userId={+userId} />
         </>
     );

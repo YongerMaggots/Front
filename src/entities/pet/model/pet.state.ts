@@ -6,7 +6,7 @@ import { handlerError } from '@/shared/lib/handle-error';
 import { PetModel } from '.';
 
 export interface PetState {
-    addNewPet: (pet: Pick<PetModel.Pet, 'name' | 'type' | 'breed'>) => Promise<void>;
+    addNewPet: (pet: Pick<PetModel.Pet, 'name' | 'kind' | 'breed'>) => Promise<void>;
     getPetsByUserId: (id: number) => Promise<PetModel.Pet[]>;
     deletePet: (id: number) => Promise<void>;
     editPet: (id: number, pet: PetModel.Pet) => Promise<void>;

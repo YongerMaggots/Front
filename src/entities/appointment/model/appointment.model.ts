@@ -4,12 +4,13 @@ import { UserModel } from '@/entities/user/model';
 export interface Appointment {
     id: number;
     pet: PetModel.Pet;
-    ness: UserModel.User; // TODO: Поменять, когда будет
+    doctor: UserModel.Doctor;
+    client: UserModel.User;
     description: string;
     date: string;
 }
 
-export type NewAppointmentFormType = Pick<Appointment, 'description'> & {
+export type NewAppointmentFormType = Pick<Appointment, 'description' | 'date'> & {
     petId: number;
     doctorId: number;
 };

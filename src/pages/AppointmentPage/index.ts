@@ -1,2 +1,2 @@
 export { New } from './New';
-export { MyPage } from './My';
+export { My } from './My';

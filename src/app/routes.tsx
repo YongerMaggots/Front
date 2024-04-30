@@ -25,7 +25,7 @@ export const routes = createRoutesFromElements(
             </Route>
             <Route path="appointment">
                 <Route path="new" element={<AppointmentPage.New />} />
-                <Route path="my" element={<AppointmentPage.MyPage />} />
+                <Route path="my" element={<AppointmentPage.My />} />
             </Route>
         </Route>
         <Route path="*" element={<NotFoundPage />} />

@@ -19,7 +19,7 @@ export const PetCard = ({
     error = false,
     selected = false,
     bordered = true,
-    isChipVisible = true,
+    isInfoVisible = true,
     padding = 24,
 }: PetCardProps) => {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -56,18 +56,34 @@ export const PetCard = ({
                 onClick={() => onSelect && onSelect(pet.id)}
             >
                 {selected && <CheckCircleTwoTone className={styles.check} />}
-                <div className={styles.imageWrapper}>
-                    <img
-                        src={getPetImage(pet.type)}
-                        alt={`Иконка ${getPetTypeName(pet.type)}`}
-                        className={styles.image}
-                    />
+                <div className={styles.imageInfo}>
+                    <div className={styles.imageWrapper}>
+                        <img
+                            src={getPetImage(pet.kind)}
+                            alt={`Иконка ${getPetTypeName(pet.kind)}`}
+                            className={styles.image}
+                        />
+                    </div>
+                    <Chip className={styles.kind}>{getPetTypeName(pet.kind)}</Chip>
                 </div>
                 <div className={styles.petInfo}>
                     <Title level={3} className={styles.name}>
                         {pet.name}
                     </Title>
-                    {isChipVisible && <Chip>{getPetTypeName(pet.type)}</Chip>}
+                    {isInfoVisible && (
+                        <>
+                            <ul className={styles.petAdditionalInfo}>
+                                <li className={styles.adInfoItem}>
+                                    <b>Порода:</b>
+                                    {pet.breed}
+                                </li>
+                                <li className={styles.adInfoItem}>
+                                    <b>Возраст:</b>
+                                    {pet.age}
+                                </li>
+                            </ul>
+                        </>
+                    )}
                 </div>
                 {my && (
                     <div className={styles.actions}>

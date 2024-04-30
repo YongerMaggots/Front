@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Button, Input, Typography } from 'antd';
+import { Button, DatePicker, Input, Typography } from 'antd';
 import { AppointmentFormProps, AppointmentFormType } from './AppointmentForm.types';
 import { Controller, useForm } from 'react-hook-form';
 import { UserModel, useProfileStore } from '@/entities/user/model';
@@ -16,15 +16,16 @@ const { TextArea } = Input;
 
 export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
     console.log(edit);
-    const [doctor, setDoctor] = useState<UserModel.Doctor[]>([]);
-    const navigate = useNavigate();
-    const { newAppointment } = useAppointmentStore();
-    const { myPets, getDoctor } = useProfileStore();
     const {
         handleSubmit,
         control,
         formState: { errors },
     } = useForm<AppointmentFormType>();
+    const navigate = useNavigate();
+
+    const [doctor, setDoctor] = useState<UserModel.Doctor[]>([]);
+    const { newAppointment } = useAppointmentStore();
+    const { myPets, authMe, getDoctor } = useProfileStore();
 
     useEffect(() => {
         handleGetDoctor();
@@ -33,6 +34,7 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
     const handleGetDoctor = async () => {
         try {
             const doctor = await getDoctor(0, 10);
+            await authMe();
             setDoctor(doctor);
         } catch (error) {
             handlerError(error);
@@ -121,7 +123,7 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                         />
                     )}
                 />
-                {/* <Title level={3} className={styles.formTitle}>
+                <Title level={3} className={styles.formTitle}>
                     Выберите дату и время:
                 </Title>
                 <Controller
@@ -137,7 +139,7 @@ export const AppointmentForm = ({ edit = false }: AppointmentFormProps) => {
                             placeholder="Выберите дату"
                         />
                     )}
-                /> */}
+                />
                 <div className={styles.actions}>
                     <Button type="primary" htmlType="submit" className={styles.button}>
                         Записаться

@@ -7,8 +7,9 @@ export enum PetTypeEnum {
 
 export interface Pet {
     id: number;
+    age: number;
     name: string;
-    type: PetTypeEnum;
+    kind: PetTypeEnum;
     breed: string;
     ownerId: number;
 }

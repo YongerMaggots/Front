@@ -46,7 +46,7 @@ const createProfileSlice: StateCreator<
 
         const getPetsByUserId = usePetStore.getState().getPetsByUserId;
         const setMyPets = get().setMyPets;
-        const getAppointmentsByUserId = useAppointmentStore.getState().getAppointmentById;
+        const getAppointmentsByUserId = useAppointmentStore.getState().getAppointmentByUserId;
         const setMyAppointments = get().setMyAppointments;
 
         const { data } = await axios.get<UserModel.IMyProfile>(API.user.my);

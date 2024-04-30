@@ -1,5 +1,4 @@
 import { Button, Input, Typography } from 'antd';
-import styles from './PetForm.module.scss';
 import { Controller, useForm } from 'react-hook-form';
 import { PetFormType } from './PetForm.types';
 import { petVariants } from '@/entities/pet/lib';
@@ -7,6 +6,7 @@ import { PetCard } from '@/entities/pet/ui';
 import { usePetStore } from '@/entities/pet/model';
 import { useNavigate } from 'react-router-dom';
 import { handlerError } from '@/shared/lib/handle-error';
+import styles from './PetForm.module.scss';
 
 const { Title } = Typography;
 
@@ -56,17 +56,17 @@ export const PetForm = () => {
                     {petVariants.map((pet) => (
                         <Controller
                             key={pet.id}
-                            name="type"
+                            name="kind"
                             control={control}
                             rules={{ required: true }}
                             render={({ field }) => (
                                 <PetCard
                                     {...field}
                                     pet={pet}
-                                    error={Boolean(errors.type)}
-                                    onSelect={() => field.onChange(pet.type)}
-                                    selected={field.value === pet.type}
-                                    isChipVisible={false}
+                                    error={Boolean(errors.kind)}
+                                    onSelect={() => field.onChange(pet.kind)}
+                                    selected={field.value === pet.kind}
+                                    isInfoVisible={false}
                                 />
                             )}
                         />
@@ -81,6 +81,17 @@ export const PetForm = () => {
                     rules={{ required: true }}
                     render={({ field }) => (
                         <Input {...field} status={errors.breed ? 'error' : ''} />
+                    )}
+                />
+                <Title level={4} className={styles.formTitle}>
+                    Возраст
+                </Title>
+                <Controller
+                    name="age"
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                        <Input {...field} type="number" status={errors.age ? 'error' : ''} />
                     )}
                 />
                 <div className={styles.actions}>

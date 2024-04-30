@@ -5,8 +5,10 @@ import { API } from '../API/appointmentApi';
 import { AppointmentModel } from '.';
 
 export interface AppointmentState {
-    getAppointmentById: (id: number) => Promise<AppointmentModel.Appointment[]>;
+    getAppointmentByUserId: (id: number) => Promise<AppointmentModel.Appointment[]>;
     newAppointment: (data: AppointmentModel.NewAppointmentFormType) => Promise<void>;
+    deleteAppointment: (id: number) => Promise<void>;
+    getAppointmentByDoctorId: (id: number) => Promise<AppointmentModel.Appointment[]>;
 }
 
 const createAppointmentSlice: StateCreator<
@@ -15,12 +17,20 @@ const createAppointmentSlice: StateCreator<
     [],
     AppointmentState
 > = () => ({
-    getAppointmentById: async (id) => {
-        const { data } = await axios.get<AppointmentModel.Appointment[]>(API.byId(id));
+    getAppointmentByUserId: async (id) => {
+        const { data } = await axios.get<AppointmentModel.Appointment[]>(API.byUserId(id));
         return data;
     },
     newAppointment: async (data) => {
         await axios.post(API.byUser, data);
+    },
+    deleteAppointment: async (id) => {
+        await axios.delete(API.byId(id));
+    },
+    getAppointmentByDoctorId: async (id) => {
+        const { data } = await axios.get<AppointmentModel.Appointment[]>(API.byDoctorId(id));
+
+        return data;
     },
 });
 

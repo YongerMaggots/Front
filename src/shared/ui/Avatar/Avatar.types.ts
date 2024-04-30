@@ -2,6 +2,6 @@ export interface AvatarProps {
     src: string | undefined;
     size: number;
     alt?: string;
-    name: string;
+    name?: string;
     className?: string;
 }

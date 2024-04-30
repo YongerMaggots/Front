@@ -1,6 +1,5 @@
 import { useProfileStore } from '@/entities/user/model';
 import { UserAppointment, UserInfo, UserPets } from '@/widgets';
-import { Divider } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 export const My = () => {
@@ -16,9 +15,7 @@ export const My = () => {
     return (
         <>
             <UserInfo userData={myProfile} my />
-            <Divider />
             <UserPets userId={myProfile.id} my />
-            <Divider />
             <UserAppointment userId={myProfile.id} my />
         </>
     );
