@@ -5,6 +5,7 @@ import { Button, Typography } from 'antd';
 
 import { Tools } from '@/shared/lib';
 import { Chip } from '@/shared/ui';
+import { Link } from 'react-router-dom';
 
 const { Title } = Typography;
 
@@ -93,7 +94,10 @@ const ClientInfo = ({ client }: ClientInfoProps) => {
             </Title>
             <ul className={styles.nessData}>
                 <li className={styles.nessName}>
-                    <b>Имя:</b> {client.name} {client.surname}
+                    <b>Имя:</b>{' '}
+                    <Link to={`/profile/${client.id}`}>
+                        {client.name} {client.surname}
+                    </Link>
                 </li>
                 <li className={styles.nessEmail}>
                     <b>Почта:</b> <a href={`mailto:${client.email}`}>{client.email}</a>

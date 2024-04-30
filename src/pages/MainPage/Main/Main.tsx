@@ -8,9 +8,18 @@ export const Main = () => {
 
     return (
         <>
-            <Title level={1}>Добро пожаловать</Title>
-            {!myProfile && <Text>Для записи ко врачу, войдите или зарегистрируйтесь</Text>}
-            {myProfile && <Text>Для записи ко врачу, войдите или зарегистрируйтесь</Text>}
+            {!myProfile ? (
+                <>
+                    <Title level={1}>Добро пожаловать</Title>
+                    <Text>Для записи ко врачу, войдите или зарегистрируйтесь</Text>
+                </>
+            ) : (
+                <>
+                    <Title level={1}>
+                        Добро пожаловать, {myProfile.name} {myProfile.surname}
+                    </Title>
+                </>
+            )}
         </>
     );
 };
