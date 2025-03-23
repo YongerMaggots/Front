@@ -4,7 +4,7 @@ import {
     AppointmentPage,
     MainPage,
     NotFoundPage,
-    PetPage,
+    ChildPage,
     ProfilePage,
     RequireAuth,
 } from '@/pages';
@@ -20,8 +20,8 @@ export const routes = createRoutesFromElements(
                 </Route>
                 <Route path=":userId" element={<ProfilePage.Profile />} />
             </Route>
-            <Route path="pet">
-                <Route path="new" element={<PetPage.New />} />
+            <Route path="child">
+                <Route path="new" element={<ChildPage.New />} />
             </Route>
             <Route path="appointment">
                 <Route path="new" element={<AppointmentPage.New />} />

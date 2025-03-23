@@ -1,4 +1,4 @@
-import { PetCard } from '@/entities/pet/ui';
+import { ChildCard } from '@/entities/child/ui';
 import styles from './AppointmentCard.module.scss';
 import { AppointmentCardProps, ClientInfoProps, DoctorInfoProps } from './AppointmentCard.types';
 import { Button, Typography } from 'antd';
@@ -34,8 +34,8 @@ export const AppointmentCard = ({
                 <Chip className={styles.dateText}>{dateFormatter(appointment.date)}</Chip>
             </div>
             <div className={styles.otherInfo}>
-                <div className={styles.petInfo}>
-                    <PetCard pet={appointment.pet} padding={12} />
+                <div className={styles.childInfo}>
+                    <ChildCard child={appointment.child} padding={12} />
                 </div>
                 <div className={styles.nessInfo}>
                     {isDoctor ? <ClientInfo client={client} /> : <DoctorInfo doctor={doctor} />}

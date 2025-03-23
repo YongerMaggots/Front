@@ -17,7 +17,6 @@ export const handlerError = (error: unknown) => {
                 if (!error.response.data.message) {
                     return Toast({ appearence: 'error', message: 'Произошла ошибка' });
                 }
-                console.log(error.response);
                 return Toast({ appearence: 'error', message: String(error.response.data.message) });
             }
         }

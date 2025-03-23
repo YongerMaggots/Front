@@ -11,7 +11,7 @@ const { Text, Title, Link } = Typography;
 const { Password } = Input;
 
 export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
-    const { auth, authMe } = useProfileStore();
+    const { login, authMe } = useProfileStore();
 
     const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -25,7 +25,7 @@ export const LoginForm = ({ isOpen, onClose, changeForm }: IProps) => {
 
     const submit = async (data: ILoginForm) => {
         try {
-            await auth(data);
+            await login(data);
             await authMe();
             onClose();
             navigate('/profile/my');

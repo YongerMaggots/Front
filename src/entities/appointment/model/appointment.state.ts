@@ -36,6 +36,6 @@ const createAppointmentSlice: StateCreator<
 
 export const useAppointmentStore = create<AppointmentState>()(
     devtools((...args) => ({ ...createAppointmentSlice(...args) }), {
-        name: 'Appointment',
+        name: 'AppointmentStore',
     })
 );

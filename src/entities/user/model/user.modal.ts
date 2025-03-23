@@ -20,6 +20,15 @@ export interface IMyProfile extends User {
     token: string;
 }
 
+export interface ILoginPayload extends Pick<User, 'email'> {
+    password: string;
+}
+
+export interface IRegisterPayload extends Pick<User, 'email' | 'surname' | 'name'> {
+    password: string;
+    repeatPassword: string;
+}
+
 export type LoginResponse = {
     token: string;
 };

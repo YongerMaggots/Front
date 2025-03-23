@@ -2,7 +2,6 @@ import axios from 'axios';
 type Token = string;
 
 const getDomain = () => {
-    console.log(import.meta.env.VITE_DOMAIN);
     return import.meta.env.VITE_DOMAIN || window.location.hostname;
 };
 

@@ -1,11 +1,16 @@
 import { useProfileStore } from '@/entities/user/model';
-import { UserAppointment, UserInfo, UserPets } from '@/widgets';
+import { UserAppointment, UserInfo, UserChildrens } from '@/widgets';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const My = () => {
-    const { myProfile } = useProfileStore();
+    const { myProfile, authMe } = useProfileStore();
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        authMe();
+    }, []);
 
     if (!myProfile) {
         navigate('/404');
@@ -15,7 +20,7 @@ export const My = () => {
     return (
         <>
             <UserInfo userData={myProfile} my />
-            <UserPets userId={myProfile.id} my />
+            <UserChildrens userId={myProfile.id} my />
             <UserAppointment userId={myProfile.id} my />
         </>
     );

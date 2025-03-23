@@ -63,7 +63,7 @@ export const UserAppointment = ({ userId, my = false }: UserAppointmentProps) =>
             <Divider />
             <div className={styles.container}>
                 <Title level={2} className={styles.title}>
-                    {my ? 'Мой записи' : 'Записи'} к врачу
+                    {my ? 'Мои записи' : 'Записи'} к врачу
                 </Title>
                 <div className={styles.appointmentsContainer}>
                     {!my && appointments.length === 0 && <Title level={4}>Записи не найдены</Title>}

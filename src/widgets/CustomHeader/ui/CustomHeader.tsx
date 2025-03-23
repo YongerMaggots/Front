@@ -1,5 +1,5 @@
 import styles from './CustomHeader.module.scss';
-import LogoImage from '/logo.jpg';
+import LogoImage from '/logo.png';
 import { Avatar, Button, Dropdown, Layout, MenuProps, Typography } from 'antd';
 import { useProfileStore } from '@/entities/user/model';
 import { AuthModal } from '@/widgets/user/ui';

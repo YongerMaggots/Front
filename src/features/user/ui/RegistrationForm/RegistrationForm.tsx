@@ -14,7 +14,7 @@ export const RegistrationForm = ({ isOpen, onClose, changeForm }: IProps) => {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [repeatPasswordVisible, setRepeatPasswordVisible] = useState(false);
 
-    const { auth, authMe } = useProfileStore();
+    const { register, authMe } = useProfileStore();
     const navigate = useNavigate();
 
     const { message } = App.useApp();
@@ -30,7 +30,7 @@ export const RegistrationForm = ({ isOpen, onClose, changeForm }: IProps) => {
             return;
         }
         try {
-            await auth(data);
+            await register(data);
             await authMe();
             onClose();
             navigate('/profile/my');

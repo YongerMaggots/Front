@@ -1,9 +1,9 @@
-import { PetModel } from '@/entities/pet/model';
+import { ChildModel } from '@/entities/child/model';
 import { UserModel } from '@/entities/user/model';
 
 export interface Appointment {
     id: number;
-    pet: PetModel.Pet;
+    child: ChildModel.Child;
     doctor: UserModel.Doctor;
     client: UserModel.User;
     description: string;
@@ -11,6 +11,6 @@ export interface Appointment {
 }
 
 export type NewAppointmentFormType = Pick<Appointment, 'description' | 'date'> & {
-    petId: number;
+    childId: number;
     doctorId: number;
 };

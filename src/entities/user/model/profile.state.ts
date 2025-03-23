@@ -4,13 +4,13 @@ import { UserModel } from '.';
 import { RoleEnum } from './user.modal';
 import axios from 'axios';
 import { API } from '../API/userApi';
-import { PetModel, usePetStore } from '@/entities/pet/model';
+import { ChildModel, useChildStore } from '@/entities/child/model';
 import { AppointmentModel, useAppointmentStore } from '@/entities/appointment/model';
 
 export interface ProfileState {
     token: string | null;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    auth: (data: any) => Promise<void>;
+    login: (data: UserModel.ILoginPayload) => Promise<void>;
+    register: (data: UserModel.IRegisterPayload) => Promise<void>;
     authMe: () => Promise<void>;
 
     myProfile: Nullable<UserModel.IMyProfile>;
@@ -21,8 +21,8 @@ export interface ProfileState {
 
     getDoctor: (limit: number, offset: number) => Promise<UserModel.Doctor[]>;
 
-    myPets: Nullable<PetModel.Pet[]>;
-    setMyPets: (pets: PetModel.Pet[]) => void;
+    myChildrens: Nullable<ChildModel.Child[]>;
+    setMyChildrens: (childrens: ChildModel.Child[]) => void;
 
     myAppointments: Nullable<AppointmentModel.Appointment[]>;
     setMyAppointments: (appointments: AppointmentModel.Appointment[]) => void;
@@ -40,28 +40,35 @@ const createProfileSlice: StateCreator<
     myProfile: null,
 
     authMe: async () => {
-        // const myProfile = get().myProfile;
-
         if (!get().token) return;
 
-        const getPetsByUserId = usePetStore.getState().getPetsByUserId;
-        const setMyPets = get().setMyPets;
+        const getChildrensByUserId = useChildStore.getState().getChildrensByUserId;
+        const setMyChildrens = get().setMyChildrens;
         const getAppointmentsByUserId = useAppointmentStore.getState().getAppointmentByUserId;
         const setMyAppointments = get().setMyAppointments;
 
         const { data } = await axios.get<UserModel.IMyProfile>(API.user.my);
-        const myPets = await getPetsByUserId(data.id);
+        const myChildrens = await getChildrensByUserId(data.id);
         const myAppointments = await getAppointmentsByUserId(data.id);
 
         set({ myProfile: data });
-        setMyPets(myPets);
+        setMyChildrens(myChildrens);
         setMyAppointments(myAppointments);
     },
 
-    auth: async (data) => {
+    login: async (data) => {
         const { data: dataRes } = await axios.post<UserModel.LoginResponse>(API.auth.login, data);
 
-        set({ token: dataRes.token });
+        set({ token: dataRes.token }, false, 'login');
+        get().authMe();
+    },
+
+    register: async (data) => {
+        const { data: dataRes } = await axios.post<UserModel.LoginResponse>(
+            API.auth.register,
+            data
+        );
+        set({ token: dataRes.token }, false, 'register');
     },
 
     getUserProfile: async (id) => {
@@ -81,17 +88,21 @@ const createProfileSlice: StateCreator<
         return data;
     },
     resetMyProfile: () => {
-        set({ myProfile: null, myPets: null, myAppointments: null, token: null });
+        set(
+            { myProfile: null, myChildrens: null, myAppointments: null, token: null },
+            false,
+            'reset'
+        );
     },
 
-    myPets: null,
+    myChildrens: null,
 
-    setMyPets: (pets) => {
-        set({ myPets: pets });
+    setMyChildrens: (childrens) => {
+        set({ myChildrens: childrens }, false, 'setMyChildrens');
     },
     myAppointments: null,
     setMyAppointments: (appointments) => {
-        set({ myAppointments: appointments });
+        set({ myAppointments: appointments }, false, 'setMyAppointments');
     },
 
     changeUserRole: async (id, role) => {
@@ -107,7 +118,7 @@ export const useProfileStore = create<ProfileState>()(
             name: 'storage',
         }),
         {
-            name: 'Profile',
+            name: 'ProfileStore',
         }
     )
 );
