@@ -16,7 +16,7 @@
 4. Добавляем домен апишки в .env файл - Создаем `.env` файл в корне проекта, и туда вводим
 
     ```
-    VITE_DOMAIN=<Домен>
+    VITE_DOMAIN=https://eerily-harmonic-sandgrouse.cloudpub.ru
     ```
 
 5. Запускаем проект
