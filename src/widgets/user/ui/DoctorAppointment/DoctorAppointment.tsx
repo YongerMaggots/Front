@@ -1,3 +1,4 @@
+import styles from './DoctorAppointment.module.scss';
 import { AppointmentModel, useAppointmentStore } from '@/entities/appointment/model';
 import { AppointmentCard } from '@/entities/appointment/ui';
 import { useProfileStore } from '@/entities/user/model';
@@ -27,7 +28,7 @@ export const DoctorAppointment = () => {
     if (!appointments) return <></>;
 
     return (
-        <div>
+        <div className={styles.container}>
             {appointments.map((appointment) => (
                 <AppointmentCard key={appointment.id} appointment={appointment} isDoctor />
             ))}
